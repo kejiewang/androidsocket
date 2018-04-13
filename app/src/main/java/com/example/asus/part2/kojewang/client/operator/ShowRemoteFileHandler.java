@@ -41,7 +41,6 @@ public class ShowRemoteFileHandler extends Handler {
     }
 
 
-
     @Override
     public void handleMessage(Message msg) {
         Bundle data =  msg.getData();

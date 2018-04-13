@@ -9,7 +9,7 @@ public class NetFileData {
     private String fileName = "$erro";
     private String filePath = ".\\";
     private String strFileSize = "0";
-    private boolean isDirectory = false;
+    private int isDirectory = 0;
     private String fileModifiedDate = "1970-01-01 00:00:00";
     public NetFileData(String fileInfo, String filePath){
         this.filePath = filePath;
@@ -17,7 +17,15 @@ public class NetFileData {
         fileName = fileInfos[0];
         fileModifiedDate = fileInfos[1];
         fileSize = Long.parseLong(fileInfos[2]);
-        isDirectory = (fileInfos[3].equals("1"));
+        if((fileInfos[3].equals("1"))){
+            isDirectory = 1;
+        }else if(fileInfos[3].equals("2")){
+            isDirectory = 2;
+        }
+        else{
+            isDirectory = 0;
+        }
+
         setSize();
     }
     private  void  setSize(){
@@ -39,7 +47,7 @@ public class NetFileData {
             return;
         }
 
-        strFileSize = String.format("%.0f",ff);
+        strFileSize = String.format("%.0fB",ff);
         return;
     }
 
@@ -75,11 +83,11 @@ public class NetFileData {
         this.strFileSize = strFileSize;
     }
 
-    public boolean isDirectory() {
+    public int isDirectory() {
         return isDirectory;
     }
 
-    public void setDirectory(boolean directory) {
+    public void setDirectory(int directory) {
         isDirectory = directory;
     }
 

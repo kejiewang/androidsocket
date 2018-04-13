@@ -2,6 +2,7 @@ package com.example.asus.part2.kojewang.client.socket;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.os.Handler;
 import android.os.Message;
 
 import com.example.asus.part2.kojewang.client.operator.ShowRemoteFileHandler;
@@ -26,9 +27,9 @@ public class ClientSocket {
     int connect_timeout = 20000;
     Socket socket;
     String cmd;
-    ShowRemoteFileHandler showRemoteFileHandler;
+    Handler showRemoteFileHandler;
     public static final String KEY_SERVER_ACK_MSG = "KEY_SERVER_ACK_MSG";
-    public ClientSocket(String ip, int port, ShowRemoteFileHandler showRemoteFileHandler){
+    public ClientSocket(String ip, int port, Handler showRemoteFileHandler){
         super();
         this.ip = ip;
         this.port = port;
@@ -100,7 +101,6 @@ public class ClientSocket {
             public void run() {
                 Connect();
                 SendMessage();
-
                 ArrayList<String> temp = AcceptMessage();
                 Message message = showRemoteFileHandler.obtainMessage();
                 Bundle bundle = new Bundle();

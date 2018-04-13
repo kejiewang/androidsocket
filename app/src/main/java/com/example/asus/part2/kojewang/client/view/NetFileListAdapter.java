@@ -47,13 +47,19 @@ public class NetFileListAdapter extends ArrayAdapter {
             viewHolder = (ViewHolder) view.getTag();
 
         }
-        viewHolder.fileSize.setText(netFileData.getStrFileSize());
+
         viewHolder.fileName.setText(netFileData.getFileName());
         viewHolder.fileDate.setText(netFileData.getFileModifiedDate());
-        if(netFileData.isDirectory()){
+        if(netFileData.isDirectory()==1){
             viewHolder.fileImage.setImageResource(R.drawable.folder);
-        }else
+            viewHolder.fileSize.setText("");
+        }else if(netFileData.isDirectory() == 2){
+            viewHolder.fileImage.setImageResource(R.drawable.database);
+            viewHolder.fileSize.setText("");
+        }
+        else
         {
+            viewHolder.fileSize.setText(netFileData.getStrFileSize());
             viewHolder.fileImage.setImageResource(R.drawable.doc);
         }
         return  view;
